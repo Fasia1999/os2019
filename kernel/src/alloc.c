@@ -428,7 +428,7 @@ void *kalloc(size_t size) {
     }
   }
 #else  
-  para_no = _cpu();
+  para_no = 0;
 #endif
 
 //  printf("%d\n",para_no);
@@ -456,7 +456,7 @@ void kfree(void *ptr) {
     }
   }
 #else
-  para_no = _cpu();
+  para_no = 0;
 //  printf("%d\n", para_no);
 #endif
 

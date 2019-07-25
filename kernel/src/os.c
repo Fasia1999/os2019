@@ -56,7 +56,7 @@ static void hello() {
     
   }
   
-  _putc("12345678"[_cpu()]); _putc('\n');  
+  _putc("12345678"[0]); _putc('\n');  
 //  void* p = pmm->alloc(1);
 //  pmm->free(p);
 //  pmm->free(p-1);
