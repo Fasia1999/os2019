@@ -247,7 +247,7 @@ int new_pages(int para_no, size_t size){
 #ifdef NATIVE  
   pthread_mutex_lock(&bitmap_mut);
 #else
-  bitmap_lock();
+  //bitmap_lock();
 #endif
   //printf("fuc");
   int pages_begin = 0;
@@ -270,7 +270,7 @@ int new_pages(int para_no, size_t size){
 #ifdef NATIVE
   pthread_mutex_unlock(&bitmap_mut);
 #else
-  bitmap_unlock();
+  //bitmap_unlock();
 #endif
 
   if(flag == 'f') {return -1;}
