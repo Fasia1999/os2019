@@ -12,10 +12,10 @@ extern pthread_mutex_t debug_mut;
 #else
 extern int state_mut;
 extern int bitmap_mut;
-void state_lock();
-void state_unlock();
-void bitmap_lock();
-void bitmap_unlock();
+//void state_lock();
+//void state_unlock();
+//void bitmap_lock();
+//void bitmap_unlock();
 /*LOCKDECL(state);
 LOCKDECL(bitmap);*/
 #endif

@@ -5,23 +5,23 @@ extern uintptr_t pm_start, pm_end;
 int state_mut = 0;
 int bitmap_mut = 0;
 
-void state_lock(){
+/*void state_lock(){
   //cli();
   while(_atomic_xchg(&state_mut,1));
-}
-void state_unlock(){
+}*/
+/*void state_unlock(){
   _atomic_xchg(&state_mut, 0);
   //sti();
-}
+}*/
 
-void bitmap_lock(){
+/*void bitmap_lock(){
   //cli();
   while(_atomic_xchg(&bitmap_mut,1));
-}
-void bitmap_unlock(){
+}*/
+/*void bitmap_unlock(){
   _atomic_xchg(&bitmap_mut, 0);
   //sti();
-}
+}*/
 
 //LOCKDEF(state);
 //LOCKDEF(bitmap);
@@ -30,7 +30,8 @@ static void pmm_init() {
   pm_end   = (uintptr_t)_heap.end;
   //printf("start: %x, end: %x", pm_start, pm_end);
   pmm_more_init();
-  parallel_num = _ncpu();
+  //parallel_num = _ncpu();
+  parallel_num = 1;
   
   assert(page_num >= parallel_num);
   for(int i = 0; i < parallel_num; ++i){
