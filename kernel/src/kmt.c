@@ -103,7 +103,7 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
 //                printf("[cpu]:%d\t[STATE]:%d\n",_cpu(),tasks[index].task->state);
                 //_intr_write(enable);
                 kmt_spin_unlock(&entry_lock[index]);
-                assert(tasks[index].task->context.eip < 0x200000);
+                assert(tasks[index].task->context.epc < 0x200000);
                 current_id[_cpu()] = index;
                 
                 return &(tasks[index].task->context);
@@ -135,8 +135,8 @@ static void kmt_init(){
     for(int i = 0; i < MAX_TASK; ++i){
         tasks[i].used = 0;
     }
-    os->on_irq(INT_MIN, _EVENT_NULL, kmt_context_save);
-    os->on_irq(INT_MAX, _EVENT_NULL, kmt_context_switch);
+    os->on_irq(INT8_MIN, _EVENT_NULL, kmt_context_save);
+    os->on_irq(INT8_MAX, _EVENT_NULL, kmt_context_switch);
 }
 
 
