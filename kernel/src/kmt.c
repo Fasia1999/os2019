@@ -31,7 +31,6 @@ static void printstack(_Context* context){
     printf("%p\n",context->eax);
     printf("%p\n",context->ebx);
     printf("***************************\n");
-
 }*/
 
 static _Context *kmt_context_save(_Event ev, _Context* context){
@@ -81,7 +80,7 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
 }
 
 static _Context *kmt_context_switch(_Event ev, _Context* context){
-    int begin = current_id[_cpu()] +1 ;
+    int begin = current_id[0] +1 ;
 //    for(int i = 0;i < _ncpu(); ++i){
 //        printf("%d, ",current_id[_cpu()]);
 //    }
@@ -104,7 +103,7 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
                 //_intr_write(enable);
                 kmt_spin_unlock(&entry_lock[index]);
                 assert(tasks[index].task->context.epc < 0x200000);
-                current_id[_cpu()] = index;
+                current_id[0] = index;
                 
                 return &(tasks[index].task->context);
             }
@@ -112,9 +111,9 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
         //_intr_write(enable);
         kmt_spin_unlock(&entry_lock[index]);
     }
-    current_id[_cpu()] = -1;
+    current_id[0] = -1;
     //printf("return %d, %p\n",-1, kernel_task[_cpu()].context.eip);
-    return &(kernel_task[_cpu()].context);
+    return &(kernel_task[0].context);
 }
 
 static void kmt_init(){
@@ -253,7 +252,7 @@ static void kmt_sem_init(sem_t *sem, const char* name, int count){
 }
 
 static void kmt_sem_wait(sem_t *sem){
-    int index = current_id[_cpu()];
+    int index = current_id[0];
 
     int enable = _intr_read();
     _intr_write(0);
@@ -290,14 +289,14 @@ static void kmt_sem_signal(sem_t *sem){
     //    assert(0);
     //    printf("p\n");
     //}
-    if(current_id[_cpu()]!=-1){
-        kmt_spin_lock(&entry_lock[current_id[_cpu()]]);
-        if(   tasks[current_id[_cpu()]].task->state != RUNNING){
-            kmt_spin_unlock(&entry_lock[current_id[_cpu()]]);
+    if(current_id[0]!=-1){
+        kmt_spin_lock(&entry_lock[current_id[0]]);
+        if(   tasks[current_id[0]].task->state != RUNNING){
+            kmt_spin_unlock(&entry_lock[current_id[0]]);
             _intr_write(enable);
             return;
         }
-        kmt_spin_unlock(&entry_lock[current_id[_cpu()]]);
+        kmt_spin_unlock(&entry_lock[current_id[0]]);
     }
 
 
