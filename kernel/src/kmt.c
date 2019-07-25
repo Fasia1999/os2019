@@ -36,7 +36,7 @@ static void printstack(_Context* context){
 
 static _Context *kmt_context_save(_Event ev, _Context* context){
     
-    int index = past_id[_cpu()];
+    int index = past_id[0];
     //printf("[ev]:%d\t[cpu id]:%d\t[past id]:%d\t[current id]:%d\t[state]:%d\n", ev.event,_cpu(),index, current_id[_cpu()], tasks[current_id[_cpu()]].task->state);
 
     if(index != -1){
@@ -68,15 +68,15 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
         //kernel_task[_cpu()].context = *context;        
     }
 
-    int cur_index = current_id[_cpu()];
+    int cur_index = current_id[0];
     if(cur_index != -1){
         tasks[cur_index].task->context = *context;
     }else{
-        kernel_task[_cpu()].context = *context;
+        kernel_task[0].context = *context;
     }
 
-    past_id[_cpu()] = cur_index;
-    current_id[_cpu()] = -1;
+    past_id[0] = cur_index;
+    current_id[0] = -1;
     return NULL;
 }
 
