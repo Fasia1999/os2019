@@ -326,7 +326,7 @@ void set_page_free(int page_begin, int page_end){
 #ifdef NATIVE
   pthread_mutex_lock(&bitmap_mut);
 #else 
-  bitmap_lock();
+  //bitmap_lock();
 #endif
 
   //printf("fuuuuuuuuuuuuu\n");
@@ -353,7 +353,7 @@ void set_page_free(int page_begin, int page_end){
 #ifdef NATIVE
   pthread_mutex_unlock(&bitmap_mut);
 #else 
-  bitmap_unlock();
+  //bitmap_unlock();
 #endif
 
 }
