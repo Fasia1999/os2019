@@ -159,6 +159,7 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
     task->name = name;
     task->stack = pmm->alloc(STACKSIZE);
     if(task->stack == NULL){
+        printf("kmt_create: task stack = NULL\n");
         return -1;
     }
     _Area stack = (_Area){task->stack, task->stack + STACKSIZE};
