@@ -16,7 +16,7 @@ static struct handler_entry{
 static int handler_num = 0;
 
 void echo_task(void *name) {
-  //printf("echo_task: %s\n", name);
+  printf("echo_task: %s\n", name);
   device_t *tty = dev_lookup(name);
   while (1) {
     printf("echo_task running\n");
