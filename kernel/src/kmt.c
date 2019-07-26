@@ -6,10 +6,22 @@
 static void kmt_spin_init(spinlock_t *lk, const char* name);
 static void kmt_spin_lock(spinlock_t *lk);
 static void kmt_spin_unlock(spinlock_t *lk);
+intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval);
 
 /*static void idle(){
     while(1);
 }*/
+
+intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
+  intptr_t result;
+  /*asm volatile ("lock xchgl %0, %1":
+    "+m"(*addr), "=a"(result) : "1"(newval) : "cc");*/
+  _intr_write(0);
+  result = *addr;
+  *addr = newval;
+  _intr_write(1);
+  return result;
+}
 
 
 task_t kernel_task[MAX_CPU];
