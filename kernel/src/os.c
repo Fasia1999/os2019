@@ -108,6 +108,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
   _Context *ret = NULL;
   int iter = handlers[0].next;
   //int c = 0;
+  printf("os_trap-iter: %d\n", iter);
   while(iter != -1){
     //c++;
     //printf("%d\n",c);
