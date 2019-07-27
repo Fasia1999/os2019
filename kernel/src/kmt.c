@@ -14,8 +14,6 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval);
 
 intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
   intptr_t result;
-  /*asm volatile ("lock xchgl %0, %1":
-    "+m"(*addr), "=a"(result) : "1"(newval) : "cc");*/
   _intr_write(0);
   result = *addr;
   *addr = newval;
@@ -92,6 +90,7 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
 }
 
 static _Context *kmt_context_switch(_Event ev, _Context* context){
+    printf("kmt_context_switch\n");
     int begin = current_id[0] +1 ;
 //    for(int i = 0;i < _ncpu(); ++i){
 //        printf("%d, ",current_id[_cpu()]);
