@@ -52,10 +52,7 @@ void input_task(void *arg);
 static void dev_init() {
   DEVICES(CREATE);
   DEVICES(INIT);
-  //for(int i = 0;i < 8;++i){
-  //  printf("dev:%p\n",devices[i]);
- //}
-  //printf("***%p\n", ((tty_t*)(devices[4]->ptr))->fbdev);
+
   kmt->create(pmm->alloc(sizeof(task_t)), "input-task", input_task, NULL);
 
   kmt->create(pmm->alloc(sizeof(task_t)), "tty-task", tty_task, NULL);
