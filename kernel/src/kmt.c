@@ -164,6 +164,7 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
     }
     _Area stack = (_Area){task->stack, task->stack + STACKSIZE};
     if(arg) printf("kmt_create: %s\n", (char*)arg);
+    else printf("kmt_create\n");
     task->context = *_kcontext(stack, entry, arg);
     task->state = RUNNABLE;
 
