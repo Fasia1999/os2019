@@ -244,12 +244,10 @@ devops_t tty_ops = {
 };
 
 void tty_task(void *arg) {
+  printf("tty_task\n");
   device_t *in = dev_lookup("input");
   device_t *ttydev = dev_lookup("tty1");
   device_t *fb = dev_lookup("fb");
-  //printf("I am here\n");
-  //printf("%p\n",ttydev->ptr);
-  //printf("ttydev fbdev:%p\n",((tty_t*)(ttydev->ptr))->fbdev);
   tty_render(ttydev->ptr);  
 
   while (1) {
