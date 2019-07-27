@@ -92,6 +92,7 @@ void input_task(void *args) {
   //kmt->sem_wait(&sem_kbdirq);
   while (1) {
     int code;
+    printf("input_task\n");
     while ((code = read_key()) != 0) {
       input_keydown(in, code);
       printf("read code:%x\n",code);
