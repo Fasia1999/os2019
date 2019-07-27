@@ -122,6 +122,7 @@ static _Context *os_trap(_Event ev, _Context *context) {
 }
 
 static void os_on_irq(int seq, int event, handler_t handler) {
+  printf("os_on_irq\n");
   handler_num++;
   assert(handler_num < HANDLER_MAX_NUM);
   if(handler_num >= HANDLER_MAX_NUM){return;}
