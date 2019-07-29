@@ -6,6 +6,7 @@ int main() {
   _cte_init(os->trap);
   
   // call sequential init code
+  printf("main\n");
   os->init(); 
   os->run();
   //_mpe_init(os->run); // all cores call os->run()
