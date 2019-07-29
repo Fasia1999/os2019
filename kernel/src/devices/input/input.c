@@ -88,7 +88,7 @@ static _Context *input_notify(_Event ev, _Context *context) {
 }
 
 void input_task(void *args) {
-  printf("input_task\n");
+  printf("****************input_task***************\n");
   device_t *in = dev_lookup("input");
   while (1) {
     int code;
