@@ -37,6 +37,7 @@ void echo_task(void *name) {
 
 static void os_init() {
   pmm->init();
+  printf("os_init\n");
   kmt->init();
   //_vme_init(pmm->alloc, pmm->free);
   dev->init();
