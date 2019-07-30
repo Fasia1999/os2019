@@ -50,7 +50,7 @@ void input_task(void *arg);
   devices[id]->ops->init(devices[id]);
 
 static void dev_init() {
-  printf("dev_init\n");
+  //printf("dev_init\n");
   DEVICES(CREATE);
   DEVICES(INIT);
   //printf("dev_init_input1\n");
