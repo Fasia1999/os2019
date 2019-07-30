@@ -130,7 +130,7 @@ static void kmt_init(){
     for(int i = 0; i < MAX_TASK; ++i){
         tasks[i].used = 0;
     }
-    printf("kmt_init*2 irq\n");
+    //printf("kmt_init*2 irq\n");
     os->on_irq(INT8_MIN, _EVENT_NULL, kmt_context_save);
     os->on_irq(INT8_MAX, _EVENT_NULL, kmt_context_switch);
 }
