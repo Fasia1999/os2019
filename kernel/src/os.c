@@ -38,18 +38,17 @@ void echo_task(void *name) {
 //void enable_interrupt();
 
 static void os_init() {
-  //enable_interrupt();
   pmm->init();
   //printf("os_init_kmt1\n");
   kmt->init();
   //printf("os_init_kmt2\n");
   //_vme_init(pmm->alloc, pmm->free);
   dev->init();
-  enable_interrupt();
-  _yield();
+  //enable_interrupt();
+  //_yield();
   //printf("os_init\n");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
-  //_yield();
+  _yield();
   //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
   //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
   //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
