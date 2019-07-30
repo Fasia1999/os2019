@@ -179,7 +179,7 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
         pmm->free(task->stack);
         return -1;
     }
-    _yield();
+    //_yield();
     return 0;   
 }
 
