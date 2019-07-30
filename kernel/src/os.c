@@ -35,7 +35,7 @@ void echo_task(void *name) {
   }
 }
 
-void enable_interrupt();
+//void enable_interrupt();
 
 static void os_init() {
   //enable_interrupt();
@@ -46,7 +46,7 @@ static void os_init() {
   //_vme_init(pmm->alloc, pmm->free);
   dev->init();
   enable_interrupt();
-  //_yield();
+  _yield();
   //printf("os_init\n");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
   //_yield();
