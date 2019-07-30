@@ -92,38 +92,26 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
 static _Context *kmt_context_switch(_Event ev, _Context* context){
     printf("kmt_context_switch\n");
     int begin = current_id[0] +1 ;
-//    for(int i = 0;i < _ncpu(); ++i){
-//        printf("%d, ",current_id[_cpu()]);
-//    }
-//    printf("\n");
     for(int i =0;i < MAX_TASK;++i){
         int index = (i + begin )% MAX_TASK;
         assert(index <= MAX_TASK);
         
-        //int enable = _intr_read();
-        //_intr_write(0);
         kmt_spin_lock(&entry_lock[index]);
         //struct task_entry* task_info = &tasks[index];
         if( tasks[index].used != 0){
             if(tasks[index].task->state == RUNNABLE){
-            //printf("cpu: %d ;task: %d\n", _cpu(), index);
-                //assert(0);
-//                printf("[ev]:%d\t[cpu]:%d\t[id_to_run]:%d\t[state]:%d\n",ev.event,_cpu(),index,tasks[index].task->state);
                 tasks[index].task->state = RUNNING;
-//                printf("[cpu]:%d\t[STATE]:%d\n",_cpu(),tasks[index].task->state);
-                //_intr_write(enable);
                 kmt_spin_unlock(&entry_lock[index]);
+                //TODO:may need to change
                 assert(tasks[index].task->context.epc < 0x200000);
                 current_id[0] = index;
                 
                 return &(tasks[index].task->context);
             }
         }
-        //_intr_write(enable);
         kmt_spin_unlock(&entry_lock[index]);
     }
     current_id[0] = -1;
-    //printf("return %d, %p\n",-1, kernel_task[_cpu()].context.eip);
     return &(kernel_task[0].context);
 }
 
@@ -133,10 +121,7 @@ static void kmt_init(){
     }
     for(int i = 0;i < MAX_CPU; ++i){
         kernel_task[i].name = "idle";
-        //kernel_task[i].stack = pmm->alloc(STACKSIZE);
-        kernel_task[i].state = RUNNABLE;
-        //_Area  stack = (_Area){kernel_task[i].stack, kernel_task[i].stack + STACKSIZE};
-        //kernel_task[i].context =  *_kcontext(stack, idle, NULL);       
+        kernel_task[i].state = RUNNABLE;   
     }
     for(int i = 0;i < MAX_CPU; ++i){
         current_id[i] = -1;  

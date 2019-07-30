@@ -107,11 +107,8 @@ static void os_run() {
 static _Context *os_trap(_Event ev, _Context *context) {
   _Context *ret = NULL;
   int iter = handlers[0].next;
-  //int c = 0;
   printf("os_trap-iter: %d\n", iter);
   while(iter != -1){
-    //c++;
-    //printf("%d\n",c);
     if( (handlers[iter].event == _EVENT_NULL) || (handlers[iter].event == ev.event)){
       _Context* next = handlers[iter].handler(ev, context);
       if(next) ret = next;
@@ -119,8 +116,6 @@ static _Context *os_trap(_Event ev, _Context *context) {
     iter = handlers[iter].next;
   }
   return ret;
-  
-  //return context;
 }
 
 static void os_on_irq(int seq, int event, handler_t handler) {
