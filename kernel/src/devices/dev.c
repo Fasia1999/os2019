@@ -42,6 +42,7 @@ static device_t *dev_create(size_t dev_size, const char* dev_name, int dev_id, d
 
 void tty_task(void *arg);
 void input_task(void *arg);
+void init_timer();
 
 #define CREATE(id, device_type, dev_name, dev_id, dev_ops) \
   devices[id] = dev_create(sizeof(device_type), dev_name, dev_id, dev_ops);
