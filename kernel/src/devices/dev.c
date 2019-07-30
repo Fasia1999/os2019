@@ -53,6 +53,7 @@ static void dev_init() {
   printf("dev_init\n");
   DEVICES(CREATE);
   DEVICES(INIT);
+  init_timer();
   //printf("dev_init_input1\n");
   kmt->create(pmm->alloc(sizeof(task_t)), "input-task", input_task, NULL);
   //printf("dev_init_input2\n");
