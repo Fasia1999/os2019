@@ -2,7 +2,7 @@
 #include <klib.h>
 
 int main() {
-  _yield();
+  //_yield();
   _ioe_init();
   _cte_init(os->trap);
   
