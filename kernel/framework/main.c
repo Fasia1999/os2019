@@ -2,6 +2,7 @@
 #include <klib.h>
 
 int main() {
+  _yield();
   _ioe_init();
   _cte_init(os->trap);
   
@@ -9,7 +10,6 @@ int main() {
   printf("main\n");
   os->init(); 
   os->run();
-  _yield();
   //_mpe_init(os->run); // all cores call os->run()
   
 //  printf("got here\n");
