@@ -4,10 +4,9 @@
 //void enable_interrupt();
 int main() {
   //enable_interrupt();
-  _yield();
   _ioe_init();
   _cte_init(os->trap);
-  
+  _yield();
   // call sequential init code
   //printf("main\n");
   os->init(); 
