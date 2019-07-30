@@ -45,7 +45,7 @@ static void os_init() {
   //printf("os_init_kmt2\n");
   //_vme_init(pmm->alloc, pmm->free);
   dev->init();
-  //_yield();
+  _yield();
   //printf("os_init\n");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
   //_yield();
