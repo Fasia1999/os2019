@@ -35,7 +35,10 @@ void echo_task(void *name) {
   }
 }
 
+void enable_interrupt();
+
 static void os_init() {
+  enable_interrupt();
   pmm->init();
   //printf("os_init_kmt1\n");
   kmt->init();
@@ -44,7 +47,7 @@ static void os_init() {
   dev->init();
   //printf("os_init\n");
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
-  _yield();
+  //_yield();
   //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
   //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
   //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");

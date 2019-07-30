@@ -55,11 +55,11 @@ static void dev_init() {
   DEVICES(INIT);
   //printf("dev_init_input1\n");
   kmt->create(pmm->alloc(sizeof(task_t)), "input-task", input_task, NULL);
-  _yield();
+  //_yield();
   //printf("dev_init_input2\n");
   //printf("dev_init_tty1\n");
   kmt->create(pmm->alloc(sizeof(task_t)), "tty-task", tty_task, NULL);
-  _yield();
+  //_yield();
   //printf("dev_init_tty2\n");
   
 }
