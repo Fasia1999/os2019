@@ -38,6 +38,7 @@ int fb_init(device_t *dev) {
     .num_sprites = NSPRITE,
     .current = 0,
   };
+  printf("fb_init3\n");
   //printf("screen width: %x, screen height:%x \n", screen_width(), screen_height());
   kmt->sem_init(&fb_sem, dev->name, 1);
   font_load(fb, TERM_FONT);
