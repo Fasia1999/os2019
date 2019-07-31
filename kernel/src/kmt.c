@@ -20,6 +20,7 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
   result = *addr;
   *addr = newval;
   _intr_write(1);
+  printf("atomic_xchg> ");
   trace_status();
   return result;
 }
@@ -162,8 +163,9 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
     
     trace_status();
     int enable = _intr_read();
-    printf("kmt_create> enable: %d\n", enable);
+    //printf("kmt_create> enable: %d\n", enable);
     _intr_write(0);
+    printf("kmt_create> ");
     trace_status();
 
     for(int i = 0;i < MAX_TASK; ++i){
@@ -181,6 +183,7 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
         kmt_spin_unlock(&entry_lock[i]);
     }
     _intr_write(enable);
+    printf("kmt_create> ");
     trace_status();
     if(c == -1){
         pmm->free(task->stack);
@@ -228,6 +231,7 @@ static void kmt_teardown(task_t *task){
 
         
     _intr_write(enable);
+    printf("kmt_teardown> ");
     trace_status();
 
     return;
@@ -282,11 +286,13 @@ static void kmt_sem_wait(sem_t *sem){
         }
         kmt_spin_unlock(&entry_lock[index]);
         _intr_write(enable);
+        printf("kmt_sem_wait> ");
         trace_status();
         _yield();
     }else{
         kmt_spin_unlock(&sem->lock);
         _intr_write(enable);
+        printf("kmt_sem_wait> ");
         trace_status();
     }
     return;
@@ -307,6 +313,7 @@ static void kmt_sem_signal(sem_t *sem){
         kmt_spin_lock(&entry_lock[current_id[0]]);
         if(   tasks[current_id[0]].task->state != RUNNING){
             kmt_spin_unlock(&entry_lock[current_id[0]]);
+            printf("kmt_sem_wait> ");
             _intr_write(enable);
             trace_status();
             return;
@@ -346,6 +353,7 @@ static void kmt_sem_signal(sem_t *sem){
     }
     sem->count ++;
     kmt_spin_unlock(&sem->lock);
+    printf("kmt_sem_wait> ");
     _intr_write(enable);
     trace_status();
     return;
