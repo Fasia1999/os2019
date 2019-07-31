@@ -13,6 +13,7 @@ static void texture_fill(struct texture *tx, int top, uint8_t *bits, uint32_t fg
     for (int x = 0; x < TEXTURE_W; x++) {
       int bitmask = top ? bits[y + TEXTURE_H] : bits[y];
       *px++ = ((bitmask >> (7 - x)) & 1) ? fg : bg;
+      printf("1");
     }
 }
 
