@@ -13,6 +13,7 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval);
 }*/
 
 intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
+    printf("atomic_xchg> ");
   intptr_t result;
   _intr_write(0);
   trace_status();
@@ -139,7 +140,7 @@ static void kmt_init(){
 
 
 static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), void* arg){
-    
+    printf("kmt_create> ");
 
     if(task == NULL){return -1;}
 
@@ -191,7 +192,7 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
 
 static void kmt_teardown(task_t *task){
     
-
+    printf("kmt_teardown> ");
     int enable = _intr_read();
     _intr_write(0);
     trace_status();
@@ -259,6 +260,7 @@ static void kmt_sem_init(sem_t *sem, const char* name, int count){
 }
 
 static void kmt_sem_wait(sem_t *sem){
+    printf("kmt_sem_wait> ");
     int index = current_id[0];
 
     int enable = _intr_read();
@@ -291,6 +293,7 @@ static void kmt_sem_wait(sem_t *sem){
 }
 
 static void kmt_sem_signal(sem_t *sem){
+    printf("kmt_sem_signal> ");
 
     int enable = _intr_read();
     _intr_write(0);  
