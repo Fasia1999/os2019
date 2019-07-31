@@ -111,7 +111,7 @@ static int input_init(device_t *dev) {
   printf("input_init2\n");
   //printf("input_init*1 irq\n");
   os->on_irq(0, _EVENT_IRQ_IODEV, input_notify);
-
+  printf("input_init3\n");
   return 0;
 }
 
