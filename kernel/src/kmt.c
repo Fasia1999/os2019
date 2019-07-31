@@ -300,7 +300,7 @@ static void kmt_sem_wait(sem_t *sem){
 }
 
 static void kmt_sem_signal(sem_t *sem){
-    printf("kmt_sem_signal> ");
+    //printf("kmt_sem_signal> ");
 
     int enable = _intr_read();
     _intr_write(0);  
@@ -314,7 +314,7 @@ static void kmt_sem_signal(sem_t *sem){
         kmt_spin_lock(&entry_lock[current_id[0]]);
         if(   tasks[current_id[0]].task->state != RUNNING){
             kmt_spin_unlock(&entry_lock[current_id[0]]);
-            printf("kmt_sem_wait> ");
+            //printf("kmt_sem_wait> ");
             _intr_write(enable);
             trace_status();
             return;
@@ -354,7 +354,7 @@ static void kmt_sem_signal(sem_t *sem){
     }
     sem->count ++;
     kmt_spin_unlock(&sem->lock);
-    printf("kmt_sem_wait> ");
+    //printf("kmt_sem_wait> ");
     _intr_write(enable);
     trace_status();
     return;
