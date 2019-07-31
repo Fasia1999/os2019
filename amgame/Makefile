@@ -1,7 +1,7 @@
 NAME := amgame
 SRCS := $(shell find -L ./src/ -name "*.c")
 export TASK    := L0
-export AM_HOME := $(PWD)/../abstract-machine
+export AM_HOME := /home/fasia/workspace/manual/projs/nexus-am
 ifeq ($(ARCH),)
 export ARCH := x86-qemu
 endif

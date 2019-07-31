@@ -1,11 +1,13 @@
 NAME           := kernel
 SRCS           := framework/main.c $(shell find -L ./src/ -name "*.c" -o -name "*.S")
 INC_DIR        := include/ framework/
-export AM_HOME := $(PWD)/../abstract-machine
-
+#export AM_HOME := $(PWD)/../abstract-machine
+#export AM_HOME := /home/fasia/workspace/manual/projs/nexus-am
+export AM_HOME := /home/fasia/workspace/nexus-am
 export Task    := L1
 ifeq ($(ARCH),)
-export ARCH := x86-qemu
+#export ARCH := x86-qemu
+export ARCH := mips32-npc
 endif
 
 PREBUILD := git initrd
