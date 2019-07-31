@@ -23,6 +23,7 @@ static void font_load(fb_t *fb, uint8_t *font) {
 }
 
 int fb_init(device_t *dev) {
+  printf("fb_init\n");
   fb_t *fb = dev->ptr;
 //  printf("true fb ops:%p\n", fb->ops);
   fb->info = pmm->alloc(sizeof(struct display_info));
