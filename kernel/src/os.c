@@ -19,7 +19,7 @@ void echo_task(void *name) {
   printf("echo_task: %s\n", name);
   device_t *tty = dev_lookup(name);
   while (1) {
-    printf("echo_task running\n");
+    //printf("echo_task running\n");
     char line[128], text[128];
     memset(line, 0, sizeof(line));
     memset(text, 0, sizeof(text));
