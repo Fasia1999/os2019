@@ -29,6 +29,7 @@ int fb_init(device_t *dev) {
   fb->info = pmm->alloc(sizeof(struct display_info));
   fb->textures = pmm->alloc(sizeof(struct texture) * NTEXTURE);
   fb->sprites = pmm->alloc(sizeof(struct sprite) * NSPRITE);
+  printf("fb_init2\n");
   *(fb->info) = (struct display_info) {
     .width = screen_width(),
     .height = screen_height(),
@@ -40,7 +41,7 @@ int fb_init(device_t *dev) {
   //printf("screen width: %x, screen height:%x \n", screen_width(), screen_height());
   kmt->sem_init(&fb_sem, dev->name, 1);
   font_load(fb, TERM_FONT);
-  printf("fb_init2\n");
+  printf("fb_init\n");
   return 0;
 }
 
