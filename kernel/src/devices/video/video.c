@@ -16,10 +16,12 @@ static void texture_fill(struct texture *tx, int top, uint8_t *bits, uint32_t fg
 }
 
 static void font_load(fb_t *fb, uint8_t *font) {
+  printf("font_load\n");
   for (int ch = 0; ch < 256; ch++) {
     texture_fill(&fb->textures[ch * 2 + 1], 0, &font[16 * ch], 0xffffff, 0x000000);
     texture_fill(&fb->textures[ch * 2 + 2], 1, &font[16 * ch], 0xffffff, 0x000000);
   }
+  printf("font_load2\n");
 }
 
 int fb_init(device_t *dev) {
