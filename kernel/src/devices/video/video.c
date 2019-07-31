@@ -13,18 +13,18 @@ static void texture_fill(struct texture *tx, int top, uint8_t *bits, uint32_t fg
     for (int x = 0; x < TEXTURE_W; x++) {
       int bitmask = top ? bits[y + TEXTURE_H] : bits[y];
       *px++ = ((bitmask >> (7 - x)) & 1) ? fg : bg;
-      printf("1");
+      //printf("1");
     }
 }
 
 static void font_load(fb_t *fb, uint8_t *font) {
   //printf("font_load\n");
   for (int ch = 0; ch < 256; ch++) {
-    printf("texture_fill: %d\n", ch);
+    //printf("texture_fill: %d\n", ch);
     texture_fill(&fb->textures[ch * 2 + 1], 0, &font[16 * ch], 0xffffff, 0x000000);
     texture_fill(&fb->textures[ch * 2 + 2], 1, &font[16 * ch], 0xffffff, 0x000000);
   }
-  printf("font_load2\n");
+  //printf("font_load2\n");
 }
 
 int fb_init(device_t *dev) {
