@@ -104,6 +104,7 @@ static void os_run() {
   hello();   
 
   _intr_write(1);
+  trace_status();
   while (1) {
     //printf("hello\n");
     //printf("%d\n", _intr_read());

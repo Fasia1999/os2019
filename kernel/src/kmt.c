@@ -163,6 +163,7 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
     int enable = _intr_read();
     printf("kmt_create> enable: %d\n", enable);
     _intr_write(0);
+    trace_status();
 
     for(int i = 0;i < MAX_TASK; ++i){
         
@@ -193,6 +194,7 @@ static void kmt_teardown(task_t *task){
 
     int enable = _intr_read();
     _intr_write(0);
+    trace_status();
     for(int i = 0;i < MAX_TASK;++i){
         kmt_spin_lock(&entry_lock[i]);
         if((tasks[i].used == 1)&&(tasks[i].task == task)){
@@ -225,6 +227,7 @@ static void kmt_teardown(task_t *task){
 
         
     _intr_write(enable);
+    trace_status();
 
     return;
 }
@@ -260,6 +263,7 @@ static void kmt_sem_wait(sem_t *sem){
 
     int enable = _intr_read();
     _intr_write(0);
+    trace_status();
 
 
     kmt_spin_lock(&sem->lock);
@@ -276,10 +280,12 @@ static void kmt_sem_wait(sem_t *sem){
         }
         kmt_spin_unlock(&entry_lock[index]);
         _intr_write(enable);
+        trace_status();
         _yield();
     }else{
         kmt_spin_unlock(&sem->lock);
         _intr_write(enable);
+        trace_status();
     }
     return;
 }
@@ -287,7 +293,8 @@ static void kmt_sem_wait(sem_t *sem){
 static void kmt_sem_signal(sem_t *sem){
 
     int enable = _intr_read();
-    _intr_write(0);    
+    _intr_write(0);  
+    trace_status();  
 
     //if( strcmp(sem->name, "keyboard-interrupt")==0){
     //    assert(0);
@@ -298,6 +305,7 @@ static void kmt_sem_signal(sem_t *sem){
         if(   tasks[current_id[0]].task->state != RUNNING){
             kmt_spin_unlock(&entry_lock[current_id[0]]);
             _intr_write(enable);
+            trace_status();
             return;
         }
         kmt_spin_unlock(&entry_lock[current_id[0]]);
@@ -336,6 +344,7 @@ static void kmt_sem_signal(sem_t *sem){
     sem->count ++;
     kmt_spin_unlock(&sem->lock);
     _intr_write(enable);
+    trace_status();
     return;
 }
 MODULE_DEF(kmt){
