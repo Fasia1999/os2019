@@ -51,9 +51,9 @@ static void os_init() {
   enable_interrupt();
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
   //_yield();
-  //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
-  //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
-  //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty3");
+  kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty4");
   //vfs->init();
 }
 
