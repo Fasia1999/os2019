@@ -265,7 +265,7 @@ static void kmt_sem_init(sem_t *sem, const char* name, int count){
 }
 
 static void kmt_sem_wait(sem_t *sem){
-    //printf("kmt_sem_wait> ");
+    printf("kmt_sem_wait\n");
     int index = current_id[0];
 
     int enable = _intr_read();
