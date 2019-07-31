@@ -116,7 +116,7 @@ static void os_run() {
 static _Context *os_trap(_Event ev, _Context *context) {
   _Context *ret = NULL;
   int iter = handlers[0].next;
-  printf("os_trap-iter: %d\n", iter);
+  //printf("os_trap-iter: %d\n", iter);
   while(iter != -1){
     if( (handlers[iter].event == _EVENT_NULL) || (handlers[iter].event == ev.event)){
       _Context* next = handlers[iter].handler(ev, context);
