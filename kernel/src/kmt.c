@@ -107,7 +107,7 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
                 tasks[index].task->state = RUNNING;
                 kmt_spin_unlock(&entry_lock[index]);
                 //TODO:may need to change
-                assert(tasks[index].task->context.epc < 0x200000);
+                //assert(tasks[index].task->context.epc < 0x200000);
                 current_id[0] = index;
                 
                 return &(tasks[index].task->context);
