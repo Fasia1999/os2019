@@ -120,6 +120,7 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
 }
 
 static void kmt_init(){
+    printf("kmt_init\n");
     for(int i = 0;i < MAX_TASK; ++i){
         kmt_spin_init(&entry_lock[i],"entry_lock");
     }
