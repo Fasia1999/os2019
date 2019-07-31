@@ -48,6 +48,7 @@ static void os_init() {
   dev->init();
   //_yield();
   //printf("os_init\n");
+  enable_interrupt();
   kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty1");
   //_yield();
   //kmt->create(pmm->alloc(sizeof(task_t)), "print", echo_task, "tty2");
@@ -105,7 +106,7 @@ static void os_run() {
   hello();   
 
   _intr_write(1);
-  trace_status();
+  //trace_status();
   while (1) {
     //printf("hello\n");
     //printf("%d\n", _intr_read());
