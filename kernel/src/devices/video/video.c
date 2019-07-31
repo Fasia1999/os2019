@@ -7,6 +7,7 @@ static sem_t fb_sem;
 extern uint8_t TERM_FONT[];
 
 static void texture_fill(struct texture *tx, int top, uint8_t *bits, uint32_t fg, uint32_t bg) {
+  printf("texure_fill\n");
   uint32_t *px = tx->pixels;
   for (int y = 0; y < TEXTURE_H; y++)
     for (int x = 0; x < TEXTURE_W; x++) {
