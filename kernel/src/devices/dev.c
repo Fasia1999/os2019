@@ -26,7 +26,7 @@ device_t *dev_lookup(const char *name) {
 }
 
 static device_t *dev_create(size_t dev_size, const char* dev_name, int dev_id, devops_t *dev_ops) {
-
+  printf("dev_create\n");
   void *data = pmm->alloc(dev_size);
 
   device_t *dev = pmm->alloc(sizeof(device_t));
