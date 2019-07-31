@@ -38,7 +38,7 @@ void echo_task(void *name) {
 //void enable_interrupt();
 
 static void os_init() {
-  printf("os_init\n");
+  //printf("os_init\n");
   enable_interrupt();
   pmm->init();
   //printf("os_init_kmt1\n");
