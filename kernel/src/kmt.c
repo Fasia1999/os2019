@@ -142,7 +142,7 @@ static void kmt_init(){
 
 
 static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), void* arg){
-    printf("kmt_create\n");
+    //printf("kmt_create\n");
 
     if(task == NULL){return -1;}
 
@@ -153,8 +153,8 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
         return -1;
     }
     _Area stack = (_Area){task->stack, task->stack + STACKSIZE};
-    //if(arg) printf("kmt_create: %s\n", (char*)arg);
-    //printf("kmt_create address: %x\n", entry);
+    if(arg) printf("kmt_create: %s\n", (char*)arg);
+    printf("kmt_create address: %x\n", entry);
     task->context = *_kcontext(stack, entry, arg);
     task->state = RUNNABLE;
 
