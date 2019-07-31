@@ -108,7 +108,7 @@ static int input_init(device_t *dev) {
   kmt->spin_init(&in->lock, "/dev/input lock");
   kmt->sem_init(&in->event_sem, "events in queue", 0);
   kmt->sem_init(&sem_kbdirq, "keyboard-interrupt", 0);
-
+  printf("input_init2\n");
   //printf("input_init*1 irq\n");
   os->on_irq(0, _EVENT_IRQ_IODEV, input_notify);
 
