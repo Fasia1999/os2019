@@ -265,7 +265,7 @@ static void kmt_sem_init(sem_t *sem, const char* name, int count){
 }
 
 static void kmt_sem_wait(sem_t *sem){
-    printf("kmt_sem_wait> ");
+    //printf("kmt_sem_wait> ");
     int index = current_id[0];
 
     int enable = _intr_read();
@@ -287,13 +287,13 @@ static void kmt_sem_wait(sem_t *sem){
         }
         kmt_spin_unlock(&entry_lock[index]);
         _intr_write(enable);
-        printf("kmt_sem_wait> ");
+        //printf("kmt_sem_wait> ");
         trace_status();
         _yield();
     }else{
         kmt_spin_unlock(&sem->lock);
         _intr_write(enable);
-        printf("kmt_sem_wait> ");
+        //printf("kmt_sem_wait> ");
         trace_status();
     }
     return;
