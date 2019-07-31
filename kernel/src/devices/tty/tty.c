@@ -169,7 +169,7 @@ static void tty_putc(tty_t *tty, char ch) {
 }
 
 int tty_init(device_t *dev) {
-  printf("tty_init\n");
+  //printf("tty_init\n");
   tty_t *tty = dev->ptr;
   tty->fbdev = dev_lookup("fb");
 

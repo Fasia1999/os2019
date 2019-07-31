@@ -28,13 +28,13 @@ static void font_load(fb_t *fb, uint8_t *font) {
 }
 
 int fb_init(device_t *dev) {
-  printf("fb_init\n");
+  //printf("fb_init\n");
   fb_t *fb = dev->ptr;
 //  printf("true fb ops:%p\n", fb->ops);
   fb->info = pmm->alloc(sizeof(struct display_info));
   fb->textures = pmm->alloc(sizeof(struct texture) * NTEXTURE);
   fb->sprites = pmm->alloc(sizeof(struct sprite) * NSPRITE);
-  printf("fb_init2\n");
+  //printf("fb_init2\n");
   *(fb->info) = (struct display_info) {
     .width = screen_width(),
     .height = screen_height(),
@@ -43,12 +43,12 @@ int fb_init(device_t *dev) {
     .num_sprites = NSPRITE,
     .current = 0,
   };
-  printf("fb_init3\n");
+  //printf("fb_init3\n");
   //printf("screen width: %x, screen height:%x \n", screen_width(), screen_height());
   kmt->sem_init(&fb_sem, dev->name, 1);
-  printf("fb_init4\n");
+  //printf("fb_init4\n");
   font_load(fb, TERM_FONT);
-  printf("fb_init\n");
+  //printf("fb_init\n");
   return 0;
 }
 

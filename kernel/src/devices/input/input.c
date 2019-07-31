@@ -88,7 +88,7 @@ static _Context *input_notify(_Event ev, _Context *context) {
 }
 
 void input_task(void *args) {
-  printf("****************input_task***************\n");
+  //printf("****************input_task***************\n");
   device_t *in = dev_lookup("input");
   while (1) {
     int code;
@@ -101,17 +101,17 @@ void input_task(void *args) {
 }
 
 static int input_init(device_t *dev) {
-  printf("input_init\n");
+  //printf("input_init\n");
   input_t *in = dev->ptr;
   in->events = pmm->alloc(sizeof(in->events[0]) * NEVENTS);
   in->front = in->rear = 0;
   kmt->spin_init(&in->lock, "/dev/input lock");
   kmt->sem_init(&in->event_sem, "events in queue", 0);
   kmt->sem_init(&sem_kbdirq, "keyboard-interrupt", 0);
-  printf("input_init2\n");
+  //printf("input_init2\n");
   //printf("input_init*1 irq\n");
   os->on_irq(0, _EVENT_IRQ_IODEV, input_notify);
-  printf("input_init3\n");
+  //printf("input_init3\n");
   return 0;
 }
 
