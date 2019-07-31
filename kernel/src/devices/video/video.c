@@ -40,6 +40,7 @@ int fb_init(device_t *dev) {
   //printf("screen width: %x, screen height:%x \n", screen_width(), screen_height());
   kmt->sem_init(&fb_sem, dev->name, 1);
   font_load(fb, TERM_FONT);
+  printf("fb_init2\n");
   return 0;
 }
 
