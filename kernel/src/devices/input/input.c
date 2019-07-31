@@ -88,10 +88,10 @@ static _Context *input_notify(_Event ev, _Context *context) {
 }
 
 void input_task(void *args) {
-  printf("****************input_task***************\n");
   device_t *in = dev_lookup("input");
   while (1) {
     int code;
+    printf("****************input_task***************\n");
     while ((code = read_key()) != 0) {
       input_keydown(in, code);
       printf("read code:%x\n",code);
