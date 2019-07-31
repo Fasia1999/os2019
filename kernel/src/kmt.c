@@ -142,7 +142,7 @@ static void kmt_init(){
 
 
 static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), void* arg){
-    //printf("kmt_create> ");
+    printf("kmt_create\n");
 
     if(task == NULL){return -1;}
 
