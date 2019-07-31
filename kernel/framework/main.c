@@ -1,12 +1,12 @@
 #include <kernel.h>
 #include <klib.h>
 
-//void enable_interrupt();
+void enable_interrupt();
 int main() {
-  //enable_interrupt();
+  enable_interrupt();
   _ioe_init();
   _cte_init(os->trap);
-  _yield();
+  //_yield();
   // call sequential init code
   //printf("main\n");
   os->init(); 
