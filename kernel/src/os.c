@@ -101,7 +101,7 @@ static void hello() {
 }
 
 static void os_run() {
-  printf("os_run> ");
+  printf("os_run\n");
   hello();   
 
   _intr_write(1);
