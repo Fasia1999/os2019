@@ -101,13 +101,10 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
         assert(index <= MAX_TASK);
         
         kmt_spin_lock(&entry_lock[index]);
-        //struct task_entry* task_info = &tasks[index];
         if( tasks[index].used != 0){
             if(tasks[index].task->state == RUNNABLE){
                 tasks[index].task->state = RUNNING;
                 kmt_spin_unlock(&entry_lock[index]);
-                //TODO:may need to change
-                //assert(tasks[index].task->context.epc < 0x200000);
                 current_id[0] = index;
                 
                 return &(tasks[index].task->context);
