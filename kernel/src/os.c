@@ -108,7 +108,7 @@ static void os_run() {
   _intr_write(1);
   //trace_status();
   while (1) {
-    printf("os_run\n");
+    //printf("os_run\n");
     //printf("hello\n");
     //printf("%d\n", _intr_read());
     //_yield();
