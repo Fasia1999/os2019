@@ -94,7 +94,7 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
 }
 
 static _Context *kmt_context_switch(_Event ev, _Context* context){
-    printf("kmt_context_switch\n");
+    //printf("kmt_context_switch\n");
     int begin = current_id[0] +1 ;
     for(int i =0;i < MAX_TASK;++i){
         int index = (i + begin )% MAX_TASK;
@@ -136,8 +136,8 @@ static void kmt_init(){
         tasks[i].used = 0;
     }
     //printf("kmt_init*2 irq\n");
-    os->on_irq(INT8_MIN, _EVENT_NULL, kmt_context_save);
-    os->on_irq(INT8_MAX, _EVENT_NULL, kmt_context_switch);
+    os->on_irq(INT8_MIN, _EVENT_IRQ_TIMER, kmt_context_save);
+    os->on_irq(INT8_MAX, _EVENT_IRQ_TIMER, kmt_context_switch);
 }
 
 
@@ -265,7 +265,7 @@ static void kmt_sem_init(sem_t *sem, const char* name, int count){
 }
 
 static void kmt_sem_wait(sem_t *sem){
-    printf("kmt_sem_wait\n");
+    //printf("kmt_sem_wait\n");
     int index = current_id[0];
 
     int enable = _intr_read();
