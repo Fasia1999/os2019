@@ -80,7 +80,7 @@ void input_keydown(device_t *dev, int code) {
 }
 
 static _Context *input_notify(_Event ev, _Context *context) {
-  printf("input input input\n");
+  //printf("input input input\n");
   //printf("%d\n", sem_kbdirq.count);
   //assert(0);
   kmt->sem_signal(&sem_kbdirq);
