@@ -111,7 +111,7 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
             }
             else
             {
-                printf("*task name*: %s\n", tasks[index].task->name);
+                printf("*task name*: %s, state: %d\n", tasks[index].task->name, tasks[index].task->state);
             }
         }
         else
