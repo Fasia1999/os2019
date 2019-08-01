@@ -245,13 +245,13 @@ devops_t tty_ops = {
 };
 
 void tty_task(void *arg) {
-  printf("tty_task\n");
   device_t *in = dev_lookup("input");
   device_t *ttydev = dev_lookup("tty1");
   device_t *fb = dev_lookup("fb");
   tty_render(ttydev->ptr);  
 
   while (1) {
+    printf("tty_task\n");
     struct input_event ev;
     int nread = in->ops->read(in, 0, &ev, sizeof(ev));
     if (nread > 0) {
