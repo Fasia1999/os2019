@@ -281,7 +281,7 @@ static void kmt_sem_wait(sem_t *sem){
     kmt_spin_lock(&sem->lock);
     sem->count--;
     if(sem->count < 0){
-//        printf("wait %s, %d\n", sem->name, -sem->count);
+        printf("wait %s, %d\n", sem->name, -sem->count);
         sem->wait_queue[index] = 1;
         kmt_spin_unlock(&sem->lock);
 
@@ -306,62 +306,40 @@ static void kmt_sem_wait(sem_t *sem){
 
 static void kmt_sem_signal(sem_t *sem){
     //printf("kmt_sem_signal> ");
-
     int enable = _intr_read();
     _intr_write(0);  
-    trace_status();  
-
-    //if( strcmp(sem->name, "keyboard-interrupt")==0){
-    //    assert(0);
-    //    printf("p\n");
-    //}
+    //trace_status();  
     if(current_id[0]!=-1){
         kmt_spin_lock(&entry_lock[current_id[0]]);
-        if(   tasks[current_id[0]].task->state != RUNNING){
+        if(tasks[current_id[0]].task->state != RUNNING){
             kmt_spin_unlock(&entry_lock[current_id[0]]);
-            //printf("kmt_sem_wait> ");
             _intr_write(enable);
-            trace_status();
+            //trace_status();
             return;
         }
         kmt_spin_unlock(&entry_lock[current_id[0]]);
     }
-
-
-//    if(strcmp(sem->name, "keyboard-interrupt")==0){
-//        assert(0);
-//    }
     kmt_spin_lock(&sem->lock);
     if(sem->count < 0){
         for(int i = 0;i < MAX_TASK; ++i){
             kmt_spin_lock(&entry_lock[i]);
             if(sem->wait_queue[i]==1){
-
-                //if(strcmp(sem->name, "keyboard-interrupt")==0){
-                //   assert(0);
-                //}
                 if(tasks[i].task->state == WAITING){            
                     tasks[i].task->state = RUNNABLE;
                 }else if(tasks[i].task->state == WAITING_TOBE){
                     tasks[i].task->state = RUNNABLE_TOBE;
                 }
-                
-
                 sem->wait_queue[i] = 0;
                 kmt_spin_unlock(&entry_lock[i]); 
                 break;
             }
             kmt_spin_unlock(&entry_lock[i]);    
         }
-        
-        //printf("signal %s\n", sem->name);
-        //assert(index > 0);
     }
     sem->count ++;
     kmt_spin_unlock(&sem->lock);
-    //printf("kmt_sem_wait> ");
     _intr_write(enable);
-    trace_status();
+    //trace_status();
     return;
 }
 MODULE_DEF(kmt){
