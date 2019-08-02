@@ -92,7 +92,7 @@ static void tty_render(tty_t *tty) {
   uint8_t *d = tty->dirty;
   kmt->sem_wait(&tty->lock);
   
-  //printf("here\n");
+  printf("here\n");
 //  printf("x:%d, y:%d,\n", tty->columns, tty->lines);
   for (int y = 0; y < tty->lines; y++) {
     for (int x = 0; x < tty->columns; x++) {
