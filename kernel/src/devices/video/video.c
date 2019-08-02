@@ -77,6 +77,7 @@ ssize_t fb_write(device_t *dev, off_t offset, const void *buf, size_t count) {
     _DEV_VIDEO_FBCTL_t ctl = {
       .w = TEXTURE_W,
       .h = TEXTURE_H,
+      .sync = 1;
     };
     for (struct sprite *sp = (struct sprite *)buf; sp < (struct sprite *)(buf + count); sp++) {
       if (sp->texture > 0 && sp->display == fb->info->current) {
