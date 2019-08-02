@@ -87,6 +87,7 @@ static int tty_cook(tty_t *tty, char ch) {
 // ------------------------------------------------------------------
 
 static void tty_render(tty_t *tty) {
+  printf("tty_render: %s\n", tty->buf);
   //printf("tty fbdev:%p\n", tty->fbdev);
   struct character *ch = tty->buf;
   uint8_t *d = tty->dirty;
