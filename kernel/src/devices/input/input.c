@@ -83,7 +83,7 @@ static _Context *input_notify(_Event ev, _Context *context) {
   //printf("input input input\n");
   //printf("%d\n", sem_kbdirq.count);
   //assert(0);
-  if(sem_kbdirq->count < 0)
+  if(sem_kbdirq.count < 0)
     kmt->sem_signal(&sem_kbdirq);
   return NULL;
 }
