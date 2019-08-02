@@ -91,13 +91,12 @@ static void tty_render(tty_t *tty) {
   struct character *ch = tty->buf;
   uint8_t *d = tty->dirty;
   kmt->sem_wait(&tty->lock);
-  
+  printf("tty_render: 0x%x\n", tty->display);
   //printf("here\n");
   //printf("x:%d, y:%d\n", tty->columns, tty->lines);
   for (int y = 0; y < tty->lines; y++) {
     for (int x = 0; x < tty->columns; x++) {
       if (*d) {
-        printf("tty_render: 0x%x\n", tty->display);
         int draw = (ch == tty->cursor) ? 0xdb : ch->ch;
         struct sprite sp[2] = {
           { .x = x * 8, .y = y * 16, .z = 0,
