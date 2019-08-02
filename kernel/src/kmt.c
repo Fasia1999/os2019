@@ -94,7 +94,7 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
 }
 
 static _Context *kmt_context_switch(_Event ev, _Context* context){
-    //printf("kmt_context_switch\n");
+    printf("kmt_context_switch\n");
     int begin = current_id[0] +1 ;
     for(int i =0;i < MAX_TASK;++i){
         int index = (i + begin )% MAX_TASK;
