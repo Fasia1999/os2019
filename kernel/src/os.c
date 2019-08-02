@@ -23,7 +23,7 @@ void echo_task(void *name) {
     char line[128], text[128];
     memset(line, 0, sizeof(line));
     memset(text, 0, sizeof(text));
-    strcpy(text, "Shell>");
+    strcpy(text, "Shel>");
     tty->ops->write(tty, 2, text, strlen(text));
     int nread = tty->ops->read(tty, 0, line, sizeof(line));
     line[nread - 1] = 0;
