@@ -281,7 +281,7 @@ static void kmt_sem_wait(sem_t *sem){
     kmt_spin_lock(&sem->lock);
     sem->count--;
     if(sem->count < 0){
-        printf("wait %s, %d\n", sem->name, sem->count);
+        //printf("wait %s, %d\n", sem->name, sem->count);
         sem->wait_queue[index] = 1;
         kmt_spin_unlock(&sem->lock);
 
@@ -321,7 +321,7 @@ static void kmt_sem_signal(sem_t *sem){
     }
     kmt_spin_lock(&sem->lock);
     if(sem->count < 0){
-        printf("signal %s, %d\n", sem->name, sem->count);
+        //printf("signal %s, %d\n", sem->name, sem->count);
         for(int i = 0;i < MAX_TASK; ++i){
             kmt_spin_lock(&entry_lock[i]);
             if(sem->wait_queue[i]==1){
