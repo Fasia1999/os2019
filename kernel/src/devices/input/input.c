@@ -92,7 +92,7 @@ void input_task(void *args) {
   device_t *in = dev_lookup("input");
   while (1) {
     int code;
-    printf("****************input_task***************\n");
+    //printf("****************input_task***************\n");
     while ((code = read_key()) != 0) {
       input_keydown(in, code);
       printf("read code:%x\n",code);
