@@ -93,7 +93,7 @@ static void tty_render(tty_t *tty) {
   kmt->sem_wait(&tty->lock);
   
   //printf("here\n");
-//  printf("x:%d, y:%d,\n", tty->columns, tty->lines);
+  printf("x:%d, y:%d\n", tty->columns, tty->lines);
   for (int y = 0; y < tty->lines; y++) {
     for (int x = 0; x < tty->columns; x++) {
       if (*d) {
@@ -108,7 +108,7 @@ static void tty_render(tty_t *tty) {
         //if(tty->fbdev->ops!=NULL){printf("*******fdev\n");}
         //printf("%p\n",tty->fbdev);
         //assert(0);
-        printf("here\n");
+        //printf("here\n");
         tty->fbdev->ops->write(tty->fbdev, SPRITE_BRK, &sp, sizeof(sp));//printf("why\n");
         }
       ch++; d++;
