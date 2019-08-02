@@ -94,7 +94,7 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
 }
 
 static _Context *kmt_context_switch(_Event ev, _Context* context){
-    printf("kmt_context_switch\n");
+    //printf("kmt_context_switch\n");
     int begin = current_id[0] +1 ;
     for(int i =0;i < MAX_TASK;++i){
         int index = (i + begin )% MAX_TASK;
@@ -111,12 +111,12 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
             }
             else
             {
-                //printf("*task name*: %s, state: %d\n", tasks[index].task->name, tasks[index].task->state);
+                printf("*task name*: %s, state: %d\n", tasks[index].task->name, tasks[index].task->state);
             }
         }
         else
         {
-            //printf("*task name*: %s\n", tasks[index].task->name);
+            printf("*task name*: %s\n", tasks[index].task->name);
         }
         kmt_spin_unlock(&entry_lock[index]);
     }
