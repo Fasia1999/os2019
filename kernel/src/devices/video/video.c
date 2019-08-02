@@ -61,6 +61,7 @@ ssize_t fb_read(device_t *dev, off_t offset, void *buf, size_t count) {
 }
 
 ssize_t fb_write(device_t *dev, off_t offset, const void *buf, size_t count) {
+  printf("fb_write\n");
   fb_t *fb = dev->ptr;
   kmt->sem_wait(&fb_sem);
   
