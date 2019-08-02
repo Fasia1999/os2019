@@ -89,7 +89,6 @@ static int tty_cook(tty_t *tty, char ch) {
 static void tty_render(tty_t *tty) {
   //printf("tty fbdev:%p\n", tty->fbdev);
   struct character *ch = tty->buf;
-  printf("tty_render: %c\n", ch->ch);
   uint8_t *d = tty->dirty;
   kmt->sem_wait(&tty->lock);
   
@@ -98,7 +97,7 @@ static void tty_render(tty_t *tty) {
   for (int y = 0; y < tty->lines; y++) {
     for (int x = 0; x < tty->columns; x++) {
       if (*d) {
-        
+        printf("tty_render: 0x%x\n", tty->display);
         int draw = (ch == tty->cursor) ? 0xdb : ch->ch;
         struct sprite sp[2] = {
           { .x = x * 8, .y = y * 16, .z = 0,
