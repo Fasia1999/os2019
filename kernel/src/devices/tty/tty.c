@@ -106,7 +106,7 @@ static void tty_render(tty_t *tty) {
             .display = tty->display, .texture = draw * 2 + 2, },
         };
         //if(tty->fbdev->ops!=NULL){printf("*******fdev\n");}
-        printf("%p\n",tty->fbdev);
+        //printf("%p\n",tty->fbdev);
         //assert(0);
         //printf("here\n");
         tty->fbdev->ops->write(tty->fbdev, SPRITE_BRK, &sp, sizeof(sp));//printf("why\n");
