@@ -212,6 +212,7 @@ ssize_t tty_read(device_t *dev, off_t offset, void *buf, size_t count) {
 
   struct tty_queue *q = &tty->queue;
   while (1) {
+    printf("tty_read\n");
     char ch = *q->front;
     if (nread < count && ch != '\0') {
       ((char *)buf)[nread] = *q->front;
