@@ -254,7 +254,7 @@ static void kmt_spin_init(spinlock_t *lk, const char* name){
 }
 
 static void kmt_spin_lock(spinlock_t *lk){
-    while(_atomic_xchg(&lk->locked,1)) printf("here\n");
+    while(_atomic_xchg(&lk->locked,1)) printf("lock_name: %s\n", lk->name);
     return;
 }
 
