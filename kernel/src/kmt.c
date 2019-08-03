@@ -21,7 +21,7 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
   *addr = newval;
   _intr_write(1);
   //printf("atomic_xchg> ");
-  trace_status();
+  //trace_status();
   return result;
 }
 
