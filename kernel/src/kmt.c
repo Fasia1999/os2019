@@ -121,7 +121,7 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
         kmt_spin_unlock(&entry_lock[index]);
     }
     current_id[0] = -1;
-    printf("*kernel task name*: %s\n", kernel_task[0].name);
+    //printf("*kernel task name*: %s\n", kernel_task[0].name);
     return &(kernel_task[0].context);
 }
 
