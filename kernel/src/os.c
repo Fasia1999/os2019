@@ -19,7 +19,7 @@ void echo_task(void *name) {
   //printf("echo_task: %s\n", name);
   device_t *tty = dev_lookup(name);
   while (1) {
-    //printf("****************echo_task********************\n");
+    printf("****************echo_task********************\n");
     char line[128], text[128];
     memset(line, 0, sizeof(line));
     memset(text, 0, sizeof(text));
@@ -110,7 +110,7 @@ static void os_run() {
   _intr_write(1);
   //trace_status();
   while (1) {
-    //printf("*******************os_run****************\n");
+    printf("*******************os_run****************\n");
     //printf("hello\n");
     //printf("%d\n", _intr_read());
     //_yield();
