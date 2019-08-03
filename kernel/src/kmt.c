@@ -17,7 +17,7 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
   intptr_t result;
   _intr_write(0);
   //trace_status();
-  asm volatile("nop");
+  asm volatile("nop;nop");
   result = *addr;
   *addr = newval;
   _intr_write(1);
