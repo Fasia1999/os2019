@@ -13,7 +13,7 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval);
 }*/
 
 intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
-    printf("atomic_xchg\n");
+    //printf("atomic_xchg\n");
   intptr_t result;
   _intr_write(0);
   trace_status();
@@ -254,7 +254,7 @@ static void kmt_spin_init(spinlock_t *lk, const char* name){
 }
 
 static void kmt_spin_lock(spinlock_t *lk){
-    while(_atomic_xchg(&lk->locked,1));
+    while(_atomic_xchg(&lk->locked,1)) printf("here\n");
     return;
 }
 
