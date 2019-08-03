@@ -29,6 +29,7 @@ void echo_task(void *name) {
     line[nread - 1] = 0;
     strcpy(text, "Echo: ");
     strcat(text, line);
+    strcat(text, "\n");
     tty->ops->write(tty, 0, text, strlen(text));
     //tty->ops->write(tty, 0, line, strlen(line));
     //strcpy(text, "\n");
