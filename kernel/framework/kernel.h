@@ -4,7 +4,7 @@
 #include <am.h>
 #include <nanos.h>
 
-#define MAX_CPU 8
+#define MAX_CPU 1
 #define MAX_TASK 20
 
 
