@@ -333,18 +333,20 @@ static void kmt_sem_signal(sem_t *sem){
     if(current_id[0]!=-1){
         printf("locked8: %d\n", current_id[0]);
         kmt_spin_lock(&entry_lock[current_id[0]]);
-        
+        printf("1\n");
         if(tasks[current_id[0]].task->state != RUNNING){
+            printf("2\n");
             kmt_spin_unlock(&entry_lock[current_id[0]]);
             printf("unlocked8\n");
             _intr_write(enable);
             //trace_status();
             return;
         }
+        printf("3\n");
         kmt_spin_unlock(&entry_lock[current_id[0]]);
         printf("unlocked8\n");
     }
-    //printf("locked9\n");
+    printf("4\n");
     kmt_spin_lock(&sem->lock);
     
     if(sem->count < 0){
