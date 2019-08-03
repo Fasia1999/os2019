@@ -80,7 +80,7 @@ void input_keydown(device_t *dev, int code) {
 }
 
 static _Context *input_notify(_Event ev, _Context *context) {
-  //printf("input input input\n");
+  printf("input notify\n");
   //printf("%d\n", sem_kbdirq.count);
   //assert(0);
   if(sem_kbdirq.count < 0)
@@ -92,7 +92,7 @@ void input_task(void *args) {
   device_t *in = dev_lookup("input");
   while (1) {
     int code;
-    printf("****************input_task***************\n");
+    //printf("****************input_task***************\n");
     while ((code = read_key()) != 0) {
       input_keydown(in, code);
       printf("read code:%x\n",code);
