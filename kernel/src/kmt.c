@@ -175,7 +175,7 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
     //printf("kmt_create> enable: %d\n", enable);
     _intr_write(0);
     //printf("kmt_create> ");
-    //trace_status();
+    trace_status();
 
     for(int i = 0;i < MAX_TASK; ++i){
         
