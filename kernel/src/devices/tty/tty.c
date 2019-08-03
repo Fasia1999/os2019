@@ -275,9 +275,7 @@ void tty_task(void *arg) {
             .current = tty->display,
           };
           tty_mark_all(tty);
-          printf("tty_write1\n");
           fb->ops->write(fb, 0, &info, sizeof(struct display_info));
-          printf("tty_write2\n");
           ttydev->ops->write(ttydev, 0, "", 0);
         }
       }
@@ -288,6 +286,7 @@ void tty_task(void *arg) {
         char ch = ev.data;
         tty_t *tty = ttydev->ptr;
         if (tty_cook(tty, ch) == 0) {
+          printf("tty_write_call\n");
           ttydev->ops->write(ttydev, 0, &ch, 1);
         }
       }
