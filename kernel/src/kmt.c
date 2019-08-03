@@ -79,7 +79,7 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
                 break;
         }
         kmt_spin_unlock(&entry_lock[index]); 
-        printf("unlocked1\n")
+        printf("unlocked1\n");
         
     }else{
         //kernel_task[_cpu()].context = *context;        
@@ -111,7 +111,7 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
             if(tasks[index].task->state == RUNNABLE){
                 tasks[index].task->state = RUNNING;
                 kmt_spin_unlock(&entry_lock[index]);
-                printf("unlocked2\n")
+                printf("unlocked2\n");
                 current_id[0] = index;
                 //printf("task name: %s\n", tasks[index].task->name);
                 return &(tasks[index].task->context);
@@ -309,7 +309,7 @@ static void kmt_sem_wait(sem_t *sem){
             tasks[index].task->state = WAITING_TOBE;
         }
         kmt_spin_unlock(&entry_lock[index]);
-        printf("unlocked7\n")
+        printf("unlocked7\n");
         _intr_write(enable);
         //printf("kmt_sem_wait> ");
         //trace_status();
