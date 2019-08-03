@@ -333,7 +333,7 @@ static void kmt_sem_signal(sem_t *sem){
     if(current_id[0]!=-1){
         printf("locked8: %d\n", current_id[0]);
         kmt_spin_lock(&entry_lock[current_id[0]]);
-        printf("1\n");
+        printf("11111111111111\n");
         if(tasks[current_id[0]].task->state != RUNNING){
             printf("2\n");
             kmt_spin_unlock(&entry_lock[current_id[0]]);
