@@ -55,8 +55,8 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
     //printf("[ev]:%d\t[cpu id]:%d\t[past id]:%d\t[current id]:%d\t[state]:%d\n", ev.event,_cpu(),index, current_id[_cpu()], tasks[current_id[_cpu()]].task->state);
 
     if(index != -1){
-        kmt_spin_lock(&entry_lock[index]);
         printf("locked1\n");
+        kmt_spin_lock(&entry_lock[index]);
         //tasks[index].task->context = *context;  
     //    printf("saved eip: %p\n", tasks[index].task->context.eip );
         switch(tasks[index].task->state){
@@ -105,8 +105,8 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
         int index = (i + begin )% MAX_TASK;
         assert(index <= MAX_TASK);
         
-        kmt_spin_lock(&entry_lock[index]);
         printf("locked2\n");
+        kmt_spin_lock(&entry_lock[index]);
         if( tasks[index].used != 0){
             if(tasks[index].task->state == RUNNABLE){
                 tasks[index].task->state = RUNNING;
@@ -184,9 +184,9 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
     trace_status();
 
     for(int i = 0;i < MAX_TASK; ++i){
-        
-        kmt_spin_lock(&entry_lock[i]);
         printf("locked3\n");
+        kmt_spin_lock(&entry_lock[i]);
+        
         if(tasks[i].used == 0){
             c = i;
             tasks[i].used = 1;
@@ -217,8 +217,9 @@ static void kmt_teardown(task_t *task){
     _intr_write(0);
     trace_status();
     for(int i = 0;i < MAX_TASK;++i){
-        kmt_spin_lock(&entry_lock[i]);
         printf("locked4\n");
+        kmt_spin_lock(&entry_lock[i]);
+        
         if((tasks[i].used == 1)&&(tasks[i].task == task)){
             switch(tasks[i].task->state){
                 case RUNNABLE:
@@ -229,8 +230,8 @@ static void kmt_teardown(task_t *task){
                     tasks[i].task->state = KILLED;
                 break;
                 case WAITING:
-                    kmt_spin_lock(&tasks[i].task->wait->lock);
                     printf("locked5\n");
+                    kmt_spin_lock(&tasks[i].task->wait->lock);
                     tasks[i].task->wait->count--;
                     tasks[i].task->wait->wait_queue[i] = 0;
                     kmt_spin_unlock(&tasks[i].task->wait->lock);
@@ -293,17 +294,17 @@ static void kmt_sem_wait(sem_t *sem){
     _intr_write(0);
     trace_status();
 
-
-    kmt_spin_lock(&sem->lock);
     printf("locked6\n");
+    kmt_spin_lock(&sem->lock);
+    
     sem->count--;
     if(sem->count < 0){
         //printf("wait %s, %d\n", sem->name, sem->count);
         sem->wait_queue[index] = 1;
         kmt_spin_unlock(&sem->lock);
-
+         printf("locked7\n");
         kmt_spin_lock(&entry_lock[index]);
-        printf("locked7\n");
+       
         if(tasks[index].task->state == RUNNING){
             tasks[index].task->wait = sem;
             tasks[index].task->state = WAITING_TOBE;
@@ -330,8 +331,9 @@ static void kmt_sem_signal(sem_t *sem){
     _intr_write(0);  
     //trace_status();  
     if(current_id[0]!=-1){
-        kmt_spin_lock(&entry_lock[current_id[0]]);
         printf("locked8\n");
+        kmt_spin_lock(&entry_lock[current_id[0]]);
+        
         if(tasks[current_id[0]].task->state != RUNNING){
             kmt_spin_unlock(&entry_lock[current_id[0]]);
             printf("unlocked8\n");
@@ -342,13 +344,15 @@ static void kmt_sem_signal(sem_t *sem){
         kmt_spin_unlock(&entry_lock[current_id[0]]);
         printf("unlocked8\n");
     }
-    kmt_spin_lock(&sem->lock);
     printf("locked9\n");
+    kmt_spin_lock(&sem->lock);
+    
     if(sem->count < 0){
         //printf("signal %s, %d\n", sem->name, sem->count);
         for(int i = 0;i < MAX_TASK; ++i){
-            kmt_spin_lock(&entry_lock[i]);
             printf("locked10\n");
+            kmt_spin_lock(&entry_lock[i]);
+            
             if(sem->wait_queue[i]==1){
                 if(tasks[i].task->state == WAITING){            
                     tasks[i].task->state = RUNNABLE;
