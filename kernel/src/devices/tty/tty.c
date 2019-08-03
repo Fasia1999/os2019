@@ -215,7 +215,7 @@ ssize_t tty_read(device_t *dev, off_t offset, void *buf, size_t count) {
 
   struct tty_queue *q = &tty->queue;
   while (1) {
-    printf("tty_read\n");
+    //printf("tty_read\n");
     char ch = *q->front;
     if (nread < count && ch != '\0') {
       ((char *)buf)[nread] = *q->front;
@@ -234,7 +234,7 @@ ssize_t tty_write(device_t *dev, off_t offset, const void *buf, size_t count) {
   tty_t *tty = dev->ptr;
   kmt->sem_wait(&tty->lock);
   
-  printf("tty_write: %s\n", buf);
+  //printf("tty_write: %s\n", buf);
   for (size_t i = 0; i < count; i++) {
     tty_putc(tty, ((const char *)buf)[i]);
   }
