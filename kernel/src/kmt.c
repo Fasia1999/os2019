@@ -86,7 +86,7 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
     if(cur_index != -1){
         tasks[cur_index].task->context = *context;
     }else{
-        printf("here\n");
+        //printf("here\n");
         kernel_task[0].context = *context;
     }
 
@@ -113,7 +113,7 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
             }
             else
             {
-                //printf("*task name*: %s, state: %d\n", tasks[index].task->name, tasks[index].task->state);
+                printf("*task name*: %s, state: %d\n", tasks[index].task->name, tasks[index].task->state);
             }
         }
         else
