@@ -170,7 +170,7 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
 
     int c = -1;
     
-    //trace_status();
+    trace_status();
     int enable = _intr_read();
     //printf("kmt_create> enable: %d\n", enable);
     _intr_write(0);
