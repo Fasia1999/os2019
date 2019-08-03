@@ -16,12 +16,12 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
     //printf("atomic_xchg> ");
   intptr_t result;
   _intr_write(0);
-  trace_status();
+  //trace_status();
   result = *addr;
   *addr = newval;
   _intr_write(1);
   //printf("atomic_xchg> ");
-  trace_status();
+  //trace_status();
   return result;
 }
 
@@ -170,12 +170,12 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
 
     int c = -1;
     
-    trace_status();
+    //trace_status();
     int enable = _intr_read();
     //printf("kmt_create> enable: %d\n", enable);
     _intr_write(0);
     //printf("kmt_create> ");
-    trace_status();
+    //trace_status();
 
     for(int i = 0;i < MAX_TASK; ++i){
         
