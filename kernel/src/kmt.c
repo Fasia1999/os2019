@@ -108,12 +108,12 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
                 tasks[index].task->state = RUNNING;
                 kmt_spin_unlock(&entry_lock[index]);
                 current_id[0] = index;
-                //printf("task name: %s\n", tasks[index].task->name);
+                printf("task name: %s\n", tasks[index].task->name);
                 return &(tasks[index].task->context);
             }
             else
             {
-                printf("*task name*: %s, state: %d\n", tasks[index].task->name, tasks[index].task->state);
+                //printf("*task name*: %s, state: %d\n", tasks[index].task->name, tasks[index].task->state);
             }
         }
         else
