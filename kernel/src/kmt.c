@@ -26,7 +26,8 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
 }
 
 
-task_t kernel_task[MAX_CPU];
+
+ kernel_task[MAX_CPU];
 
 struct task_entry{
     task_t* task;
@@ -85,6 +86,7 @@ static _Context *kmt_context_save(_Event ev, _Context* context){
     if(cur_index != -1){
         tasks[cur_index].task->context = *context;
     }else{
+        printf("here\n");
         kernel_task[0].context = *context;
     }
 
