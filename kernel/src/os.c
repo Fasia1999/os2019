@@ -122,10 +122,10 @@ static _Context *os_trap(_Event ev, _Context *context) {
   int iter = handlers[0].next;
   //printf("os_trap-iter: %d\n", iter);
   while(iter != -1){
-    printf("os_trap1\n");
+    //printf("os_trap1\n");
     if( (handlers[iter].event == _EVENT_NULL) || (handlers[iter].event == ev.event)){
       _Context* next = handlers[iter].handler(ev, context);
-      printf("os_trap2\n");
+      //printf("os_trap2\n");
       if(next) ret = next;
     }
     iter = handlers[iter].next;
