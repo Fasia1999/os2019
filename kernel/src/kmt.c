@@ -27,7 +27,7 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
 
 
 
- kernel_task[MAX_CPU];
+task_t kernel_task[MAX_CPU];
 
 struct task_entry{
     task_t* task;
