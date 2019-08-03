@@ -231,6 +231,7 @@ ssize_t tty_read(device_t *dev, off_t offset, void *buf, size_t count) {
 
 ssize_t tty_write(device_t *dev, off_t offset, const void *buf, size_t count) {
   //printf("tty_write\n");
+  kmt->sem_signal(&sem_kbdirq);
   tty_t *tty = dev->ptr;
   kmt->sem_wait(&tty->lock);
   
