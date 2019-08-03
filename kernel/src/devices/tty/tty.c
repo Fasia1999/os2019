@@ -275,7 +275,9 @@ void tty_task(void *arg) {
             .current = tty->display,
           };
           tty_mark_all(tty);
+          printf("tty_write1\n");
           fb->ops->write(fb, 0, &info, sizeof(struct display_info));
+          printf("tty_write2\n");
           ttydev->ops->write(ttydev, 0, "", 0);
         }
       }
