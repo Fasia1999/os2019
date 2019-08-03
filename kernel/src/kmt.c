@@ -105,7 +105,7 @@ static _Context *kmt_context_switch(_Event ev, _Context* context){
         int index = (i + begin )% MAX_TASK;
         assert(index <= MAX_TASK);
         
-        printf("locked2\n");
+        printf("locked2: %d\n", index);
         kmt_spin_lock(&entry_lock[index]);
         if( tasks[index].used != 0){
             if(tasks[index].task->state == RUNNABLE){
