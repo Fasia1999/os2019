@@ -286,7 +286,7 @@ void tty_task(void *arg) {
         char ch = ev.data;
         tty_t *tty = ttydev->ptr;
         if (tty_cook(tty, ch) == 0) {
-          printf("tty_write_call\n");
+          //tty_write call(print what you type on the screen)
           ttydev->ops->write(ttydev, 0, &ch, 1);
         }
       }
