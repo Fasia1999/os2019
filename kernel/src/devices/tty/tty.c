@@ -231,11 +231,10 @@ ssize_t tty_read(device_t *dev, off_t offset, void *buf, size_t count) {
 
 ssize_t tty_write(device_t *dev, off_t offset, const void *buf, size_t count) {
   //printf("tty_write\n");
-  asm volatile("nop; nop");
   tty_t *tty = dev->ptr;
   kmt->sem_wait(&tty->lock);
   
-  //printf("tty_write: %s\n", buf);
+  printf("tty_write: %s\n", buf);
   for (size_t i = 0; i < count; i++) {
     tty_putc(tty, ((const char *)buf)[i]);
   }
