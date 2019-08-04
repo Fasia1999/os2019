@@ -41,24 +41,12 @@ static spinlock_t entry_lock[MAX_TASK];
 int current_id[MAX_CPU];
 static int past_id[MAX_CPU];
 
-/*
-static void printstack(_Context* context){
-    printf("***************************\n");
-    printf("%p\n",context->eax);
-    printf("%p\n",context->ebx);
-    printf("***************************\n");
-}*/
-
 static _Context *kmt_context_save(_Event ev, _Context* context){
     
     int index = past_id[0];
-    //printf("[ev]:%d\t[cpu id]:%d\t[past id]:%d\t[current id]:%d\t[state]:%d\n", ev.event,_cpu(),index, current_id[_cpu()], tasks[current_id[_cpu()]].task->state);
-
     if(index != -1){
         //printf("locked1: %d\n", index);
         kmt_spin_lock(&entry_lock[index]);
-        //tasks[index].task->context = *context;  
-    //    printf("saved eip: %p\n", tasks[index].task->context.eip );
         switch(tasks[index].task->state){
             case RUNNING:
             //case SIGNALED:
@@ -171,17 +159,10 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
     //printf("kmt_create address: %x\n", entry);
     task->context = *_kcontext(stack, entry, arg);
     task->state = RUNNABLE;
-
-
-
     int c = -1;
-    
-    trace_status();
     int enable = _intr_read();
     //printf("kmt_create> enable: %d\n", enable);
     _intr_write(0);
-    //printf("kmt_create> ");
-    trace_status();
 
     for(int i = 0;i < MAX_TASK; ++i){
         //printf("locked3: %d\n", i);
@@ -200,8 +181,6 @@ static int kmt_create(task_t *task, const char * name, void(*entry)(void *arg), 
         //printf("unlocked3\n");
     }
     _intr_write(enable);
-    //printf("kmt_create> ");
-    trace_status();
     if(c == -1){
         pmm->free(task->stack);
         return -1;
