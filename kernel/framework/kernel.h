@@ -68,6 +68,12 @@ struct semaphore{
 
 };
 
+struct task_entry{
+    task_t* task;
+    int used;
+};
+
+typedef struct task_entry task_entry;
 
 typedef struct {
   void (*init)();

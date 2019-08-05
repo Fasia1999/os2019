@@ -1,6 +1,7 @@
 #include<common.h>
 #include<klib.h>
 #include<am.h>
+#include<kernel.h>
 
 
 static void kmt_spin_init(spinlock_t *lk, const char* name);
@@ -30,12 +31,6 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
 
 task_t kernel_task[MAX_CPU];
 
-struct task_entry{
-    task_t* task;
-    int used;
-};
-
-typedef struct task_entry task_entry;
 static task_entry tasks[MAX_TASK];
 static spinlock_t entry_lock[MAX_TASK];
 int current_id[MAX_CPU];
