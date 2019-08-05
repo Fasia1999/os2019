@@ -119,7 +119,7 @@ struct filesystem {
 
 struct fsops {
   void (*init)(struct filesystem *fs, const char *name, device_t *dev);
-  inode_t *(*lookup)(inode_t *ind, const char *path, int flags);
+  inode_t *(*lookup)(filesystem_t *fs, const char *path, int flags);
   int (*close)(inode_t *inode);
 };
 
@@ -132,10 +132,9 @@ struct inodeops {
   ssize_t (*read)(file_t *file, char *buf, size_t size);
   ssize_t (*write)(file_t *file, const char *buf, size_t size);
   off_t (*lseek)(file_t *file, off_t offset, int whence);
-  int (*mkdir)(const char *name);
-  int (*rmdir)(const char *name);
-  int (*link)(const char *name, inode_t *inode);
-  int (*unlink)(const char *name);
+  int (*mkdir)(inode_t* inode, const char *name);
+  int (*rmdir)(inode_t* inode, const char *name);
+  inode_t* (*find)(inode_t* cur,const char* path,int flags);
 };
 
 #define DIREC 0
@@ -152,7 +151,8 @@ struct file {
   int flags;
   int refcnt; 
   inode_t *inode;
-  uint64_t offset;
+  uint32_t offset;
+  spinlock_t lk;
 };
 
 typedef struct{
