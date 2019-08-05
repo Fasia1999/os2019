@@ -38,6 +38,7 @@ static void os_init() {
   pmm->init();
   kmt->init();
   dev->init();
+  vfs->init();
   enable_interrupt();
   kmt->create(pmm->alloc(sizeof(task_t)), "echo_task", echo_task, "tty1");
   kmt->create(pmm->alloc(sizeof(task_t)), "echo_task", echo_task, "tty2");
