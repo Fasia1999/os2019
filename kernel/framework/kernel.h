@@ -47,12 +47,14 @@ typedef enum TASK_STATE{RUNNABLE=0, RUNNING, WAITING,KILLED, WAITING_TOBE, RUNNA
 #define NOFILE 16
 struct task{
   const char* name;
-  file_t *fildes[NOFILE];  
+  file_t *fd[NOFILE];  
+  inode_t* cur_dir;
   TASK_STATE state;
   inode_t* cur_inode;
   sem_t* wait;
   _Context context;
-  char* stack;  
+  char* stack;
+  char pwd[0x100]; 
 };
 
 struct spinlock{
