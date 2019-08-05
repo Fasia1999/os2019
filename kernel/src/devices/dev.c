@@ -16,8 +16,8 @@ extern devops_t tty_ops, fb_ops, rd_ops, input_ops;
 #define DEV_CNT(...) + 1
 device_t *devices[0 DEVICES(DEV_CNT)];
 
+const size_t devices_cnt = DEVICES(DEV_CNT);
 device_t *dev_lookup(const char *name) {
-  //printf("dev_lookup: %s\n", name);
   for (int i = 0; i < LENGTH(devices); i++) 
     if (strcmp(devices[i]->name, name) == 0)
       return devices[i];
@@ -26,7 +26,7 @@ device_t *dev_lookup(const char *name) {
 }
 
 static device_t *dev_create(size_t dev_size, const char* dev_name, int dev_id, devops_t *dev_ops) {
-  //printf("dev_create\n");
+
   void *data = pmm->alloc(dev_size);
 
   device_t *dev = pmm->alloc(sizeof(device_t));

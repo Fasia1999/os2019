@@ -12,7 +12,7 @@
 
 
 inline task_t* get_cur(void){
-    int cpu_id=_cpu();
+    int cpu_id=0;
 extern task_entry tasks[MAX_TASK];
 extern int current_id[MAX_CPU];
     task_t* ret=tasks[current_id[cpu_id]].task;
