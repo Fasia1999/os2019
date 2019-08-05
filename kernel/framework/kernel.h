@@ -110,6 +110,8 @@ extern int current_id[MAX_CPU];
 extern inode_t* root_inode;
 
 struct filesystem {
+  const char* name;
+  inode_t *inodes, *root, *root_parent;
   fsops_t *ops;
   device_t *dev;
 };
