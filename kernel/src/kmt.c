@@ -30,8 +30,7 @@ intptr_t _atomic_xchg(volatile intptr_t *addr, intptr_t newval) {
 
 
 task_t kernel_task[MAX_CPU];
-
-static task_entry tasks[MAX_TASK];
+task_entry tasks[MAX_TASK];
 static spinlock_t entry_lock[MAX_TASK];
 int current_id[MAX_CPU];
 static int past_id[MAX_CPU];
